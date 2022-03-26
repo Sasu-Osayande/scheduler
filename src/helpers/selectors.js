@@ -34,3 +34,22 @@ export function getInterview(state, interview) {
   //   Object.assign(interviewObj, { "interviewer": state.interviewers[interview.interviewer], "student": interview.stdent});
   // }
 }
+
+export function getInterviewersForDay(state, name) {
+  let resultArray = [];
+
+  const interviewersArray = state.days.filter(
+    (day) => day.name === name
+  );
+
+  if (state.days.length === 0 || interviewersArray.length === 0) {
+    return resultArray;
+  }
+
+  const interviewersForDay = interviewersArray[0].interviewers;
+
+  for (const interviewer of interviewersForDay) {
+    resultArray.push(state.interviewers[interviewer]);
+  }
+  return resultArray;
+}
