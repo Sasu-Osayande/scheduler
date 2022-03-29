@@ -23,24 +23,15 @@ export function getInterview(state, interview) {
     return null;
   }
   return {
-      student: interview.student,
-      interviewer: {
-        id: interview.interviewer,
-        name: state.interviewers[interview.interviewer].name,
-        avatar: state.interviewers[interview.interviewer].avatar
-      }
-  }
-  // if (Object.keys(interviewObj).length === 0) {
-  //   Object.assign(interviewObj, { "interviewer": state.interviewers[interview.interviewer], "student": interview.stdent});
-  // }
+    student: interview.student,
+    interviewer: state.interviewers[interview.interviewer],
+  };
 }
 
 export function getInterviewersForDay(state, name) {
   let resultArray = [];
 
-  const interviewersArray = state.days.filter(
-    (day) => day.name === name
-  );
+  const interviewersArray = state.days.filter((day) => day.name === name);
 
   if (state.days.length === 0 || interviewersArray.length === 0) {
     return resultArray;
