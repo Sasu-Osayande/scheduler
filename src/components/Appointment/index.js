@@ -22,9 +22,12 @@ export default function Appointment(props) {
       interviewer
     };
     props.bookInterview(props.id, interview);
-    transition(
-      props.bookInterview ? SHOW : EMPTY
-    );
+    // transition(
+    //   props.bookInterview ? SHOW : EMPTY
+    // );
+    props.bookInterview(props.id, interview).then(() => {
+      transition(SHOW);
+    });
   }
 
   return (
