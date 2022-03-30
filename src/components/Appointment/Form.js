@@ -16,21 +16,31 @@ export default function Form(props) {
   const cancel = () => {
     reset();
     props.onCancel();
-  }
+  };
 
   function validate() {
     if (student === "") {
-      setError("Student name cannot be blank");
-      return;
+      return setError("Student name cannot be blank");
+    }
+    if (!interviewer) {
+      return setError("Select an interviewer");
     }
     setError("");
     props.onSave(student, interviewer);
   }
 
+  // function interviewerValidate() {
+  //   if (!interviewer) {
+  //     return setError("Select an interviewer");
+  //   }
+  //   setError("");
+  //   props.onSave(student, interviewer);
+  // }
+
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
-        <form onSubmit={event => event.preventDefault()} autoComplete="off">
+        <form onSubmit={(event) => event.preventDefault()} autoComplete="off">
           <input
             className="appointment__create-input text--semi-bold"
             name="name"
@@ -38,13 +48,17 @@ export default function Form(props) {
             placeholder="Enter Student Name"
             value={student}
             onChange={(event) => setStudent(event.target.value)}
-            onCancel={cancel}
+            // onCancel={cancel}
             // add the following when using getByTestId
             data-testid="student-name-input"
           />
           <section className="appointment__validation">{error}</section>
         </form>
-        <InterviewerList interviewers={props.interviewers} value={interviewer} onChange={setInterviewer} />
+        <InterviewerList
+          interviewers={props.interviewers}
+          value={interviewer}
+          onChange={setInterviewer}
+        />
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
