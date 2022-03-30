@@ -30,6 +30,17 @@ export default function useApplicationData() {
     });
   }, []);
 
+  // function getSpotsRemaining(day, appointments) {
+  //   let numOfSpots = 0;
+
+  //   for(const spot of day.appointments) {
+  //     if (appointments[spot].interview === null) {
+  //       numOfSpots++;
+  //     }
+  //   }
+  //   return numOfSpots
+  // }
+
   function bookInterview(id, interview) {
     console.log(id, interview);
 
