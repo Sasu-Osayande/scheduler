@@ -30,19 +30,41 @@ export default function useApplicationData() {
     });
   }, []);
 
-  // function getSpotsRemaining(day, appointments) {
-  //   let numOfSpots = 0;
+  function updateSpots(appointments) {
+    // let numOfSpots = 0;
 
-  //   for(const spot of day.appointments) {
-  //     if (appointments[spot].interview === null) {
-  //       numOfSpots++;
-  //     }
-  //   }
-  //   return numOfSpots
-  // }
+    // for(const spot of day.appointments) {
+    //   if (appointments[spot].interview === null) {
+    //     numOfSpots++;
+    //   }
+    // }
+    // return numOfSpots
+
+    const findDay = state.days.find(day => day.name === state.day);
+
+    const findAppoinments = findDay.appointments;
+
+    const numOfSpotsRemaining = findAppoinments.map(id => appointments[id].interview).filter(interview => interview === null).length;
+
+    console.log("find:", findDay);
+    console.log("findApp:", findAppoinments);
+    console.log("NumofSpotsRemaining", numOfSpotsRemaining);
+
+    const updatedDays = [...state.days].map(day => {
+      if(day.name === state.day) {
+        day.spots = numOfSpotsRemaining
+      }
+      return day;
+    });
+
+    setState({...state, days: updatedDays});
+
+  }
 
   function bookInterview(id, interview) {
-    console.log(id, interview);
+    // console.log(id, interview);
+    // console.log("State.days:", JSON.stringify(state.days));
+    // console.log("State.appointments:", JSON.stringify(state.appointments));
 
     const appointment = {
       ...state.appointments[id],
@@ -59,7 +81,7 @@ export default function useApplicationData() {
         interview: interview,
       })
       .then((res) => {
-        // console.log(res);
+        updateSpots(appointments);
         setState({
           ...state,
           appointments,
@@ -84,7 +106,7 @@ export default function useApplicationData() {
         appointment: appointment,
       })
       .then((res) => {
-        // console.log(res);
+        updateSpots(appointments);
         setState({
           ...state,
           appointments,
