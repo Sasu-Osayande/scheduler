@@ -29,14 +29,6 @@ export default function Form(props) {
     props.onSave(student, interviewer);
   }
 
-  // function interviewerValidate() {
-  //   if (!interviewer) {
-  //     return setError("Select an interviewer");
-  //   }
-  //   setError("");
-  //   props.onSave(student, interviewer);
-  // }
-
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
@@ -48,7 +40,6 @@ export default function Form(props) {
             placeholder="Enter Student Name"
             value={student}
             onChange={(event) => setStudent(event.target.value)}
-            // onCancel={cancel}
             // add the following when using getByTestId
             data-testid="student-name-input"
           />
