@@ -42,6 +42,7 @@ export default function Application() {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
+          {/* value and onChange are variables named as controlled components */}
           <DayList days={state.days} value={state.day} onChange={setDay} />
         </nav>
         <img

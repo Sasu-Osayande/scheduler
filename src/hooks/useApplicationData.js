@@ -13,6 +13,7 @@ export default function useApplicationData() {
 
   useEffect(() => {
     Promise.all([
+      // request data to get days, appointments, and interviewers data
       axios.get("http://localhost:8001/api/days"),
       axios.get("http://localhost:8001/api/appointments"),
       axios.get("http://localhost:8001/api/interviewers"),
