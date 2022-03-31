@@ -6,6 +6,7 @@ import InterviewerListItem from "./InterviewerListItem";
 
 export default function InterviewerList(props) {
 
+  // A way to typecheck the value using PropTypes
   InterviewerList.propTypes = {
     interviewers: PropTypes.array.isRequired
   };

@@ -10,6 +10,7 @@ export default function DayListItem(props) {
   });
 
   const formatSpots = () => {
+    // Display specific headers according to the spots remaining
     if (props.spots === 0) {
       return "no spots remaining";
     }

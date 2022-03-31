@@ -13,7 +13,7 @@ export default function useApplicationData() {
 
   useEffect(() => {
     Promise.all([
-      // request data to get days, appointments, and interviewers data
+      // request to get days, appointments, and interviewers data
       axios.get("http://localhost:8001/api/days"),
       axios.get("http://localhost:8001/api/appointments"),
       axios.get("http://localhost:8001/api/interviewers"),
@@ -28,18 +28,17 @@ export default function useApplicationData() {
   }, []);
 
   function updateSpots(appointments) {
+    // find the day equal to the state
     const findDay = state.days.find((day) => day.name === state.day);
 
     const findAppoinments = findDay.appointments;
 
+    // search through the appointment object to the interview data to determine the amount of null spots
     const numOfSpotsRemaining = findAppoinments
       .map((id) => appointments[id].interview)
       .filter((interview) => interview === null).length;
 
-    console.log("find:", findDay);
-    console.log("findApp:", findAppoinments);
-    console.log("NumofSpotsRemaining", numOfSpotsRemaining);
-
+    // update the spots for the days object with the numOfSpotsRemaining
     const updatedDays = [...state.days].map((day) => {
       if (day.name === state.day) {
         day.spots = numOfSpotsRemaining;
@@ -51,6 +50,7 @@ export default function useApplicationData() {
   }
 
   function bookInterview(id, interview) {
+    // update the appointments object to reflect the new state
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
@@ -66,6 +66,7 @@ export default function useApplicationData() {
         interview: interview,
       })
       .then((res) => {
+        // once the request is resolved, update the spots
         updateSpots(appointments);
         setState({
           ...state,
@@ -76,6 +77,7 @@ export default function useApplicationData() {
   }
 
   function cancelInterview(id) {
+    // update the appointments object to reflect the new state and set interview to null
     const appointment = {
       ...state.appointments[id],
       interview: null,
@@ -91,6 +93,7 @@ export default function useApplicationData() {
         appointment: appointment,
       })
       .then((res) => {
+        // once the request is resolved, update the spots
         updateSpots(appointments);
         setState({
           ...state,

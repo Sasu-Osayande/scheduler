@@ -10,6 +10,22 @@ Install dependencies with `npm install`.
 npm start
 ```
 
+## Fork and Clone the scheduler-api
+
+[scheduler-api](https://github.com/lighthouse-labs/scheduler-api)
+
+## Running the scheduler-api Normally
+
+```sh
+npm start
+```
+
+## Running the scheduler-api with Errors
+
+```sh
+npm run error
+```
+
 ## Running Jest Test Framework
 
 ```sh

@@ -13,6 +13,7 @@ import {
 import useApplicationData from "hooks/useApplicationData";
 
 export default function Application() {
+  // use a custom hook, useApplicationData to separate the intital code to retrieve the API data
   const { state, setDay, bookInterview, cancelInterview } = useApplicationData();
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
